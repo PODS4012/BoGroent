@@ -17,12 +17,33 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+                        @if (User?.Identity?.IsAuthenticated ?? false)
+                        {
+                            @*<li class="nav-item">
+                    <a asp-controller="Portal" asp-action="Edit" class="btn btn-primary">@User.Identity.Name, Account</a>
+                </li>*@
+                            <li class="nav-item ml-1">
+                                <a asp-controller="Portal" asp-action="Logout" class="btn btn-danger">@User.Identity.Name, Log out</a>
+                            </li>
+                            @*@if (User.IsInRole("admin") || User.IsInRole("editor"))
+                {
+                    <li class="nav-item ml-1">
+                        <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="btn btn-success">Admin Area</a>
+                    </li>
+                }*@
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a asp-controller="Portal" asp-action="Login" class="btn btn-success">Log in</a>
+                            </li>
+                        }
+                    </ul>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>

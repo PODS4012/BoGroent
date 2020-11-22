@@ -1,4 +1,5 @@
 ﻿using BoGroent.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BoGroent.Infrastructure
 {
-    public class BoGroentContext : DbContext
+    public class BoGroentContext : IdentityDbContext<AppUser>
     {
         public BoGroentContext(DbContextOptions<BoGroentContext> options) : base(options)
         {
