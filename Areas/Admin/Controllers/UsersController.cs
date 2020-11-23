@@ -13,12 +13,15 @@ namespace BoGroent.Areas.Admin.Controllers
     [Area("Admin")]
     public class UsersController : Controller
     {
+
         private readonly UserManager<AppUser> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private IPasswordHasher<AppUser> passwordHasher;
 
-        public UsersController(UserManager<AppUser> userManager, IPasswordHasher<AppUser> passwordHasher)
+        public UsersController(UserManager<AppUser> userManager, IPasswordHasher<AppUser> passwordHasher, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
+            this.roleManager = roleManager;
             this.passwordHasher = passwordHasher;
         }
 
