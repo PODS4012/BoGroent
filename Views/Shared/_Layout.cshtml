@@ -54,14 +54,14 @@
             @if (User?.Identity?.IsAuthenticated ?? false)
             {
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-2">
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Portal" asp-action="Details">User Detail</a>
                             </li>
 
                             <li class="list-group-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="PersonalLeases" asp-action="Index"></a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="PersonalLeases" asp-action="Index">User Leases</a>
                             </li>
                         </ul>
                     </div>
