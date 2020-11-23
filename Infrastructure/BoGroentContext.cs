@@ -16,5 +16,6 @@ namespace BoGroent.Infrastructure
         }
 
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Leases> Leases { get; set; }
     }
 }

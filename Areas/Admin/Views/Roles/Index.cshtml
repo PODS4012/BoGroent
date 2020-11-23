@@ -26,7 +26,8 @@
                 <td>@role.Name</td>
                 <td user-role="@role.Id"></td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@role.Id">Edit</a>
+                    <a asp-action="EditUserRole" asp-route-id="@role.Id">Edit User Roles</a> |
+                    <a asp-action="EditRole" asp-route-id="@role.Id">Edit Role</a> |
                     <a class="confirmDeletion" asp-action="Delete" asp-route-id="@role.Id">Delete</a>
                 </td>
             </tr>

@@ -1,4 +1,4 @@
-﻿@model RoleEdit
+﻿@model RoleUserEdit
 
 @{
     ViewData["Title"] = "Edit Role";
@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-md-10">
-        <form asp-action="Edit">
+        <form asp-action="EditUserRole">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <input type="hidden" name="RoleName" value="@Model.Role.Name" />

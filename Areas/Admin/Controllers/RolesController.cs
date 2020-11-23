@@ -49,8 +49,8 @@ namespace BoGroent.Areas.Admin.Controllers
             return View();
         }
 
-        //GET /admin/roles/edit
-        public async Task<IActionResult> Edit(string id)
+        //GET /admin/roles/edituserrole
+        public async Task<IActionResult> EditUserRole(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);
 
@@ -63,7 +63,7 @@ namespace BoGroent.Areas.Admin.Controllers
                 list.Add(user);
             }
 
-            return View(new RoleEdit
+            return View(new RoleUserEdit
             {
                 Role = role,
                 Members = members,
@@ -71,10 +71,10 @@ namespace BoGroent.Areas.Admin.Controllers
             });
         }
 
-        //POST /admin/roles/edit
+        //POST /admin/roles/edituserrole
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(RoleEdit roleEdit)
+        public async Task<IActionResult> EditUserRole(RoleUserEdit roleEdit)
         {
             IdentityResult result;
 
@@ -92,6 +92,59 @@ namespace BoGroent.Areas.Admin.Controllers
 
             return Redirect(Request.Headers["Referer"].ToString());
 
+        }
+
+        //GET /admin/roles/editrole
+        public async Task<IActionResult> EditRole(string id)
+        {
+            IdentityRole role = await roleManager.FindByIdAsync(id);
+
+            if (role == null)
+            {
+                TempData["Error"] = $"Role with Id: {id} cannot be found";
+                return NotFound();
+            }
+
+            var model = new RoleEdit
+            {
+                Id = role.Id,
+                RoleName = role.Name
+            };
+            return View(model);
+        }
+
+        //POST /admin/roles/editrole
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditRole(RoleEdit model)
+        {
+            var role = await roleManager.FindByIdAsync(model.Id);
+
+            if (role == null)
+            {
+                TempData["Error"] = $"Role with Id: {model.Id} cannot be found";
+                return NotFound();
+            }
+            else
+            {
+                role.Name = model.RoleName;
+
+                // Update the Role using UpdateAsync
+                var result = await roleManager.UpdateAsync(role);
+
+                if (result.Succeeded)
+                {
+                    TempData["Success"] = $"Role with Id: {model.Id} has been updated.";
+                    return RedirectToAction("Index");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View(model);
+            }
         }
     }
 }
