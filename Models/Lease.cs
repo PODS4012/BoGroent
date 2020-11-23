@@ -16,6 +16,8 @@ namespace BoGroent.Models
 
         public string CarBrand { get; set; }
         public string CarColor { get; set; }
+
+        [DataType(DataType.Currency), Column(TypeName = "decimal(18, 2)")]
         public decimal CarRentPrice { get; set; }
 
         [Required, Display(Name = "User Id")]
@@ -34,7 +36,7 @@ namespace BoGroent.Models
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyy}", ApplyFormatInEditMode = true)]
         public DateTime EndDate { get; set; }
 
-        [Display(Name = "Total Rent Price")]
+        [Display(Name = "Total Rent Price"), DataType(DataType.Currency), Column(TypeName = "decimal(18, 2)")]
         public decimal TotalPrice { get { return (EndDate.Date - StartDate.Date).Days * CarRentPrice; } }
 
         public string Paid { get; set; }

@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201123095152_InitialLease.cs" />
+    <Compile Remove="Migrations\20201123095152_InitialLease.Designer.cs" />
+    <Compile Remove="Migrations\20201123095409_InitialLease.cs" />
+    <Compile Remove="Migrations\20201123095409_InitialLease.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Models\" />
   </ItemGroup>
