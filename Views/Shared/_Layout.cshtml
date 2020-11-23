@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BoGroent</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -21,18 +22,15 @@
                     <ul class="navbar-nav flex-grow-1 justify-content-end">
                         @if (User?.Identity?.IsAuthenticated ?? false)
                         {
-                            @*<li class="nav-item">
-                    <a asp-controller="Portal" asp-action="Edit" class="btn btn-primary">@User.Identity.Name, Account</a>
-                </li>*@
                             <li class="nav-item ml-1">
                                 <a asp-controller="Portal" asp-action="Logout" class="btn btn-danger">@User.Identity.Name, Log out</a>
                             </li>
-                            @if (User.IsInRole("admin") )
+                            @if (User.IsInRole("admin"))
                             {
                                 <li class="nav-item ml-1">
                                     <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="btn btn-success">Admin Area</a>
                                 </li>
-                                }
+                            }
                         }
                         else
                         {
@@ -41,34 +39,43 @@
                             </li>
                         }
                     </ul>
-                    <ul class="navbar-nav flex-grow-1">
+                    @*<ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                    </ul>
+                    </ul>*@
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            <div class="row">
-                <div class="col-3">
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">User Detail</a>
-                        </li>
+
+            @if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                <div class="row">
+                    <div class="col-3">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Portal" asp-action="Details">User Detail</a>
+                            </li>
 
                             <li class="list-group-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="" ></a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="PersonalLeases" asp-action="Index"></a>
                             </li>
-                    </ul>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        @RenderBody()
+                    </div>
                 </div>
-                <div class="col">
-                    @RenderBody()
-                </div>
-            </div>
-            
+            }
+            else
+            {
+                @RenderBody()
+            }
+
+
         </main>
     </div>
 
@@ -79,6 +86,8 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

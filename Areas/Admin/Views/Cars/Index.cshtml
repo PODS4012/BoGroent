@@ -17,7 +17,7 @@ else
         <a asp-action="Create">Create New Car</a>
     </p>
 
-    <table class="table">
+    <table id="tblsort" class="cell-border">
         <thead>
             <tr>
                 <th>
@@ -35,37 +35,46 @@ else
                 <th>
                     @Html.DisplayNameFor(model => model.Image)
                 </th>
-                <th></th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdPlate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Brand)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Color)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RentPrice)
-                </td>
-                <td>
-                    <img src="~/media/cars/@item.Image" width="50" alt="" />
-                </td>
-                <td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdPlate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RentPrice)
+                    </td>
+                    <td>
+                        <img src="~/media/cars/@item.Image" width="50" alt="" />
+                    </td>
+                    <td>
 
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a class="confirmDeletion" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a class="confirmDeletion" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
+    @section Scripts {
+        <script>
+        $(document).ready(function () {
+            $('#tblsort').DataTable();
+        });
+        </script>
+    }
+
 }
+
 

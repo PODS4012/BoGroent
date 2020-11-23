@@ -53,6 +53,17 @@ namespace BoGroent.Controllers
 
             return View(login);
         }
+
+        //GET /portal/details
+        public async Task<IActionResult> Details()
+        {
+            AppUser appUser = await userManager.FindByNameAsync(User.Identity.Name);
+
+            UserEditDetail user = new UserEditDetail(appUser);
+
+            return View(user);
+        }
+
         //GET /portal/logout
         public async Task<IActionResult> Logout(string returnUrl)
         {

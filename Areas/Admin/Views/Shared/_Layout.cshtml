@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Admin Area</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
@@ -21,16 +22,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Cars" asp-action="Index">Rent Cars</a>
                         </li>
-
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Leases" asp-action="Index">Leases</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Users" asp-action="Index">Users</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Roles" asp-action="Index">Roles</a>
                         </li>
-                        @*<li class="nav-item ml-1 logout">
+
+                        <li class="nav-item ml-1 logout">
                             <a asp-area="" asp-controller="Portal" asp-action="Logout" class="btn btn-danger">Log out</a>
-                        </li>*@
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -46,6 +50,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jqueryui/jquery-ui.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Lease>
+
+@{
+    ViewData["Title"] = "Leases";
+}
+
+<h1>Leases</h1>
+
+<p>
+    <a asp-action="Create">Create New Lease</a>
+</p>
+<table id="tblsort" class="display compact">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarBrand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserUserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Payment)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarBrand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserUserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                @if (item.Payment == "Pending")
+                {
+                    <td>
+                        <font color="red">@Html.DisplayFor(modelItem => item.Payment)</font>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <font color="green">@Html.DisplayFor(modelItem => item.Payment)</font>
+                    </td>
+                }
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="confirmDeletion" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#tblsort').DataTable();
+        });
+    </script>
+}
+

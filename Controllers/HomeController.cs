@@ -2,13 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BoGroent.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BoGroent.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index() => View();
-        
+        private readonly BoGroentContext contex;
+        public HomeController(BoGroentContext contex)
+        {
+            this.contex = contex;
+        }
+
+        //GET /admin/cars
+        public async Task<IActionResult> Index()
+        {
+            return View(await contex.Cars.OrderByDescending(x => x.Id).ToListAsync());
+        }
     }
 }

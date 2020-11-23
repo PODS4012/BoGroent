@@ -4,14 +4,16 @@ using BoGroent.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BoGroent.Migrations
 {
     [DbContext(typeof(BoGroentContext))]
-    partial class BoGroentContextModelSnapshot : ModelSnapshot
+    [Migration("20201123120900_UpdateLeaseCarIdPorperty")]
+    partial class UpdateLeaseCarIdPorperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,7 +142,7 @@ namespace BoGroent.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Payment")
+                    b.Property<string>("Paid")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartDate")

@@ -75,7 +75,7 @@ namespace BoGroent.Areas.Admin.Controllers
             _ = new AppUser();
             AppUser appUser = await userManager.FindByIdAsync(id);
 
-            UserEdit user = new UserEdit(appUser);
+            UserEditDetail user = new UserEditDetail(appUser);
 
             return View(user);
         }
@@ -84,7 +84,7 @@ namespace BoGroent.Areas.Admin.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(UserEdit user)
+        public async Task<IActionResult> Edit(UserEditDetail user)
         {
             AppUser appUser = new AppUser();
             appUser = await userManager.FindByIdAsync(user.Id);

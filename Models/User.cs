@@ -28,18 +28,5 @@ namespace BoGroent.Models
 
         [Required, DataType(DataType.Password), MinLength(4, ErrorMessage = "Minimum length is 4")]
         public string Password { get; set; }
-
-        //public User() { }
-
-        //public User(AppUser appUser)
-        //{
-        //    Id = appUser.Id;
-        //    Name = appUser.Name;
-        //    Email = appUser.Email;
-        //    PhoneNumber = appUser.PhoneNumber;
-        //    Address = appUser.Address;
-        //    UserName = appUser.UserName;
-        //    Password = appUser.PasswordHash;
-        //}
     }
 }

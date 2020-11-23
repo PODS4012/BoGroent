@@ -1,7 +1,29 @@
-﻿
+﻿@model IEnumerable<Car>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Bo Grønt";
 }
 
-<h1>Velkomen til Boligforeningen "Bo Grønt"</h1>
+<h1>Velkomen til "Bo Grønt" Boligforeningens Leasing side</h1>
 
+<div>
+    <h4>Contact Administration in regards to leasing a car or becoming an active membership.</h4>
+    <hr />
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="~/media/cars/@item.Image" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@item.IdPlate</h5>
+
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Brand: @item.Brand</li>
+                <li class="list-group-item">Color: @item.Color</li>
+                <li class="list-group-item">Price: @item.RentPrice</li>
+            </ul>
+        </div>
+    }
+</div>

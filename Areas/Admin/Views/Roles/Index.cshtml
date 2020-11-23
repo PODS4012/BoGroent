@@ -9,13 +9,13 @@
 <p>
     <a asp-action="Create">Create New Role</a>
 </p>
-<table class="table">
+<table id="tblsort" class="cell-border">
     <thead>
         <tr>
             <th>Id</th>
             <th>Role</th>
             <th>Users</th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -34,3 +34,10 @@
         }
     </tbody>
 </table>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#tblsort').DataTable();
+        });
+    </script>
+}

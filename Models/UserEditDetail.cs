@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BoGroent.Models
 {
-    public class UserEdit
+    public class UserEditDetail
     {
         public string Id { get; set; }
 
@@ -29,9 +29,9 @@ namespace BoGroent.Models
         [DataType(DataType.Password), MinLength(4, ErrorMessage = "Minimum length is 4")]
         public string Password { get; set; }
 
-        public UserEdit() { }
+        public UserEditDetail() { }
 
-        public UserEdit(AppUser appUser)
+        public UserEditDetail(AppUser appUser)
         {
             Id = appUser.Id;
             Name = appUser.Name;
