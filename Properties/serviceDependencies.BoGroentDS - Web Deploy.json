@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/dsmainsql/databases/dbmain",
+      "type": "mssql.azure",
+      "connectionId": "BoGroentContext",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

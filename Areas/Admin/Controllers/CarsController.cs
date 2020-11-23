@@ -5,12 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using BoGroent.Infrastructure;
 using BoGroent.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BoGroent.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Area("Admin")]
     public class CarsController : Controller
     {

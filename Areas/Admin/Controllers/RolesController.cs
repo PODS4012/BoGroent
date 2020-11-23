@@ -4,11 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using BoGroent.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BoGroent.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "admin")]
     [Area("Admin")]
     public class RolesController : Controller
     {
@@ -63,12 +65,14 @@ namespace BoGroent.Areas.Admin.Controllers
                 list.Add(user);
             }
 
-            return View(new RoleUserEdit
+            RoleUserEdit roleUserEdit = new RoleUserEdit
             {
                 Role = role,
                 Members = members,
                 NonMembers = nonMembers
-            });
+            };
+
+            return View(roleUserEdit);
         }
 
         //POST /admin/roles/edituserrole
