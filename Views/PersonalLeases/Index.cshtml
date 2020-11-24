@@ -39,32 +39,41 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+        <tr>
+            <td>
+                Bo Groent @Html.DisplayFor(modelItem => item.CarId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarBrand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarColor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarRentPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            @if (item.Payment == "Pending")
+            {
                 <td>
-                    Bo Groent @Html.DisplayFor(modelItem => item.CarId)
+                    <font color="red">@Html.DisplayFor(modelItem => item.Payment)</font>
                 </td>
+            }
+            else
+            {
                 <td>
-                    @Html.DisplayFor(modelItem => item.CarBrand)
+                    <font color="green">@Html.DisplayFor(modelItem => item.Payment)</font>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CarColor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CarRentPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TotalPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Payment)
-                </td>
-            </tr>
+            }
+        </tr>
         }
     </tbody>
 </table>
