@@ -27,7 +27,7 @@ namespace BoGroent.Controllers
         {
             AppUser appUser = await userManager.FindByNameAsync(User.Identity.Name);
 
-            return View(await contex.Leases.Where(x => x.UserId == appUser.Id).OrderByDescending(x => x.Id).ToListAsync());
+            return View(await contex.Leases.Where(x => x.UserId == appUser.Id).OrderByDescending(x => x.EndDate).ToListAsync());
         }
     }
 }
