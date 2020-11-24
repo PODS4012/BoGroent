@@ -19,7 +19,7 @@ namespace BoGroent.Controllers
         //GET /admin/cars
         public async Task<IActionResult> Index()
         {
-            return View(await contex.Cars.OrderByDescending(x => x.Id).ToListAsync());
+            return View(await contex.Cars.OrderBy(x => x.Id).ToListAsync());
         }
     }
 }
