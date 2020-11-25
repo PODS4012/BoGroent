@@ -8,7 +8,7 @@ namespace BoGroent.Models
 {
     public class Login
     {
-        [Required, StringLength(7)]
+        [Required, MinLength(7, ErrorMessage = "Minimum length is 7")]
         public string UserName { get; set; }
 
         [Required, DataType(DataType.Password), MinLength(4, ErrorMessage = "Minimum length is 4")]
