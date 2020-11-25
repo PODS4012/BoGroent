@@ -91,7 +91,14 @@ namespace BoGroent.Areas.Admin.Controllers
             foreach (string userId in roleEdit.DeleteIds ?? new string[] { })
             {
                 AppUser user = await userManager.FindByIdAsync(userId);
-                result = await userManager.RemoveFromRoleAsync(user, roleEdit.RoleName);
+                if ( user.UserName == "superadmin")
+                {
+                    TempData["Error"] = "The admin role from superadmin user cannot be dropped!";
+                }
+                else
+                {
+                    result = await userManager.RemoveFromRoleAsync(user, roleEdit.RoleName);
+                }
             }
 
             return Redirect(Request.Headers["Referer"].ToString());
@@ -131,23 +138,31 @@ namespace BoGroent.Areas.Admin.Controllers
             }
             else
             {
-                role.Name = model.RoleName;
-
-                // Update the Role using UpdateAsync
-                var result = await roleManager.UpdateAsync(role);
-
-                if (result.Succeeded)
+                if (role.Name == "admin" && model.RoleName != "admin")
                 {
-                    TempData["Success"] = $"Role with Id: {model.Id} has been updated.";
+                    TempData["Error"] = $"admin role cannot be changed!";
                     return RedirectToAction("Index");
                 }
-
-                foreach (var error in result.Errors)
+                else
                 {
-                    ModelState.AddModelError("", error.Description);
-                }
+                    role.Name = model.RoleName;
 
-                return View(model);
+                    // Update the Role using UpdateAsync
+                    var result = await roleManager.UpdateAsync(role);
+
+                    if (result.Succeeded)
+                    {
+                        TempData["Success"] = $"Role with Id: {model.Id} has been updated.";
+                        return RedirectToAction("Index");
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+
+                    return View(model);
+                }
             }
         }
     }

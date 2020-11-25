@@ -114,16 +114,24 @@ namespace BoGroent.Areas.Admin.Controllers
         {
             var user = await userManager.FindByIdAsync(id);
 
-            var result = await userManager.DeleteAsync(user);
-            if (result.Succeeded)
+            if (user.UserName == "superadmin")
             {
-                TempData["Success"] = "User Successfully Deleted";
+                TempData["Error"] = "superadmin cannot be dropped!";
                 return RedirectToAction("Index");
             }
             else
             {
-                TempData["Error"] = "Error Deleting User";
-                return RedirectToAction("Index");
+                var result = await userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    TempData["Success"] = "User Successfully Deleted";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["Error"] = "Error Deleting User";
+                    return RedirectToAction("Index");
+                }
             }
         }
     }
