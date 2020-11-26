@@ -112,6 +112,7 @@ namespace BoGroent.Areas.Admin.Controllers
 
         public async Task<ActionResult> Delete(string id)
         {
+            AppUser appUser = await userManager.FindByNameAsync(User.Identity.Name);
             var user = await userManager.FindByIdAsync(id);
 
             if (user.UserName == "superadmin")
@@ -121,16 +122,24 @@ namespace BoGroent.Areas.Admin.Controllers
             }
             else
             {
-                var result = await userManager.DeleteAsync(user);
-                if (result.Succeeded)
+                if (user.UserName == appUser.UserName)
                 {
-                    TempData["Success"] = "User Successfully Deleted";
+                    TempData["Error"] = "Sorry you cannot drop yourself!";
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    TempData["Error"] = "Error Deleting User";
-                    return RedirectToAction("Index");
+                    var result = await userManager.DeleteAsync(user);
+                    if (result.Succeeded)
+                    {
+                        TempData["Success"] = "User Successfully Deleted";
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        TempData["Error"] = "Error Deleting User";
+                        return RedirectToAction("Index");
+                    }
                 }
             }
         }

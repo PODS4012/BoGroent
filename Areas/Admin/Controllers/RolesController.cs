@@ -97,7 +97,15 @@ namespace BoGroent.Areas.Admin.Controllers
                 }
                 else
                 {
-                    result = await userManager.RemoveFromRoleAsync(user, roleEdit.RoleName);
+                    AppUser appUser = await userManager.FindByNameAsync(User.Identity.Name);
+                    if (user.UserName == appUser.UserName)
+                    {
+                        TempData["Error"] = "The role from currently logged user cannot be dropped!";
+                    }
+                    else
+                    {
+                        result = await userManager.RemoveFromRoleAsync(user, roleEdit.RoleName);
+                    }
                 }
             }
 
