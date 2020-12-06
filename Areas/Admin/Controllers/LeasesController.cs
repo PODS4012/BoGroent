@@ -59,6 +59,21 @@ namespace BoGroent.Areas.Admin.Controllers
                     ModelState.AddModelError("", "The lease End Date has to be larger than Start date");
                     return View(lease);
                 }
+                if (lease.StartDate == lease.EndDate)
+                {
+                    ModelState.AddModelError("", "Minimum lease time is 1 day");
+                    return View(lease);
+                }
+
+                var leasesCount = contex.Leases.Where(x => x.CarId == lease.CarId && x.EndDate >= lease.StartDate);
+                var leaseLast = await contex.Leases.Where(x => x.CarId == lease.CarId).MaxAsync(x => x.EndDate);
+
+                if (leasesCount.Count() > 0)
+                {
+                    ModelState.AddModelError("", $"{car.Brand} is already booked. Next free booking slot is avaiable on: {leaseLast.Date.AddDays(1):dd-MM-yyyy}");
+                    return View(lease);
+                }
+
 
                 lease.CarBrand = car.Brand;
                 lease.CarColor = car.Color;
@@ -113,9 +128,14 @@ namespace BoGroent.Areas.Admin.Controllers
                     ModelState.AddModelError("", "The lease End Date has to be larger than Start date");
                     return View(lease);
                 }
+                if (lease.StartDate == lease.EndDate)
+                {
+                    ModelState.AddModelError("", "Minimum lease time is 1 day");
+                    return View(lease);
+                }
                 if (lease.Payment == null)
                 {
-                    ModelState.AddModelError("", "Select the Paid option");
+                    ModelState.AddModelError("", "Select payment option");
                     return View(lease);
                 }
 
