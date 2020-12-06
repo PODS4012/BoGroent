@@ -65,12 +65,13 @@ namespace BoGroent.Areas.Admin.Controllers
                     return View(lease);
                 }
 
-                var leasesCount = contex.Leases.Where(x => x.CarId == lease.CarId && x.EndDate >= lease.StartDate);
-                var leaseLast = await contex.Leases.Where(x => x.CarId == lease.CarId).MaxAsync(x => x.EndDate);
+                var leasesCount = contex.Leases.Where(x => x.CarId == lease.CarId && x.EndDate >= lease.StartDate && x.StartDate <= lease.EndDate);
 
                 if (leasesCount.Count() > 0)
                 {
-                    ModelState.AddModelError("", $"{car.Brand} is already booked. Next free booking slot is avaiable on: {leaseLast.Date.AddDays(1):dd-MM-yyyy}");
+                    var leaseLast = await contex.Leases.Where(x => x.CarId == lease.CarId).MaxAsync(x => x.EndDate);
+
+                    ModelState.AddModelError("", $"{car.Brand} is already booked in that period. Next free booking slot is avaiable on: {leaseLast.Date.AddDays(1):dd-MM-yyyy}");
                     return View(lease);
                 }
 
