@@ -75,7 +75,6 @@ namespace BoGroent.Areas.Admin.Controllers
                     return View(lease);
                 }
 
-
                 lease.CarBrand = car.Brand;
                 lease.CarColor = car.Color;
                 lease.CarRentPrice = car.RentPrice;
