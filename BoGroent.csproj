@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\test\**" />
+    <Content Remove="Areas\test\**" />
+    <EmbeddedResource Remove="Areas\test\**" />
+    <None Remove="Areas\test\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Migrations\20201123095152_InitialLease.cs" />
     <Compile Remove="Migrations\20201123095152_InitialLease.Designer.cs" />
     <Compile Remove="Migrations\20201123095409_InitialLease.cs" />
