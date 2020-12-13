@@ -19,7 +19,7 @@ namespace BoGroent.Areas.Admin.Controllers
                     ViewBag.ErrorMessage = "Oops, there was a problem.";
                     break;
             }
-            return View("Not Found");
+            return View("NotFound");
         }
     }
 }
